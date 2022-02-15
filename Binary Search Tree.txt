@@ -1,0 +1,107 @@
+ #include<stdio.h>
+ #include<stdlib.h>
+ typedef struct BST
+{
+    struct BST*left,*right;
+    int info;
+}tree;
+
+tree*newnode(int x)
+{
+    tree*ptr;
+    ptr=malloc(sizeof(tree));
+    ptr->info=x;
+    ptr->left=ptr->right=NULL;
+    
+    return ptr;
+}
+tree * insertion(tree*t,int x)
+{
+    if(t==NULL)
+    {
+        return newnode(x);
+    }
+    else if(x>t->info)
+    {
+        t->right=insertion(t->right,x);
+           
+        }
+    else 
+    {
+        t->left=insertion(t->left,x);
+    }
+    return t;
+    }
+void inorder(tree*t){
+   if (t != NULL){
+       
+      inorder(t->left);
+      printf("%d \t", t->info);
+      inorder(t->right);
+   }
+}
+void preorder(tree*t)
+{
+    if (t != NULL){
+       
+      
+      printf("%d \t", t->info);
+      preorder(t->left);
+      preorder(t->right);
+   }
+}
+void postorder(tree*t)
+{
+    if (t != NULL){
+       
+      
+     
+      postorder(t->left);
+      postorder(t->right);
+       printf("%d \t", t->info);
+   }
+     
+}
+int main()
+{   int x;
+    tree*t=NULL;
+    
+    printf("enter the Value You want to insert at a First Node or Parent Node\n");
+    scanf("%d",&x);
+    
+    t=newnode(x);
+    insertion(t,19);
+    insertion(t,3);
+    insertion(t,15);
+    insertion(t,9);
+     
+    
+    int choice;
+    while(1)
+    {
+        printf("\nenter 1 for inorder\n2 for pre oreder\n3 for post order\n4 for exit\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+            printf("inorder are=\n");
+            inorder(t);
+            break;
+            case 2:
+            printf("pre order are=\n");
+            preorder(t);
+            break;
+            case 3:
+            printf("post order are=\n");
+            postorder(t);
+            break;
+            case 4:
+            exit(0);
+             
+             
+            
+        }
+    }
+}
+
+
